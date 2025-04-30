@@ -116,14 +116,27 @@ export const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: "Something went wrong in Login",
     });
   }
 };
 
-export const getProfile = async (req, res) => {};
+export const getProfile = async (req, res) => {
+  try {
+    return res.status(200).json({
+      success: true,
+      message: "User authenticated successfully",
+      user: req.user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong in getProfile",
+    });
+  }
+};
 
 export const logoutUser = async (req, res) => {
   try {
@@ -138,7 +151,7 @@ export const logoutUser = async (req, res) => {
       message: "User Logged Out successfully",
     });
   } catch (error) {
-    return res.status(500).json({
+    res.status(500).json({
       success: false,
       message: "Something went wrong in Logout",
     });
